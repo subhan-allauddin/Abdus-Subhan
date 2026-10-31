@@ -5,9 +5,10 @@ export interface Project {
   title: string;
   description: string;
   tags: string[];
-  liveUrl: string;
-  githubUrl: string;
+  liveUrl?: string;
+  githubUrl?: string;
   featured?: boolean;
+  status?: string;
   stars?: number;
   image?: string;
 }
@@ -18,6 +19,7 @@ export interface Experience {
   company: string;
   location?: string;
   period: string;
+  status?: string;
   description: string;
   highlights: string[];
   skills: string[];
@@ -43,7 +45,8 @@ export interface Testimonial {
 
 export const PORTFOLIO_DATA = {
   personalInfo: {
-    name: "Abdul Subhan",
+    name: "Abdus Subhan Allauddin",
+    initials: "ASA",
     role: "Frontend Developer",
     tagline: "Building clean, responsive & user-friendly web experiences.",
     bio: "Passionate frontend developer focused on creating responsive, fast, and visually appealing web applications using modern JavaScript frameworks.",
@@ -52,7 +55,6 @@ export const PORTFOLIO_DATA = {
     linkedin: "https://www.linkedin.com/in/muhammad-subhan-allauddin-a43127283/",
     github: "https://github.com/subhan-allauddin",
     resume: resumeUrl,
-    yearsExperience: "1+",
     projectsCompleted: "8+",
     clientsSatisfied: "100%",
   },
@@ -67,7 +69,7 @@ export const PORTFOLIO_DATA = {
         { name: "JavaScript", level: 85, description: "ES6+, Async/Await, DOM manipulation & Logic" },
         { name: "React.js", level: 85, description: "Hooks, Component architecture & State management" },
         { name: "Next.js", level: 80, description: "Server components, App router & SEO optimization" },
-        { name: "Tailwind CSS", level: 90, description: "Utility-first styling & Responsive design" }
+        { name: "Tailwind CSS", level: 90, description: "Utility-first styling & Responsive design" },
       ]
     },
     {
@@ -76,7 +78,8 @@ export const PORTFOLIO_DATA = {
       items: [
         { name: "Node.js", level: 70, description: "Server runtime, NPM ecosystem & Core modules" },
         { name: "MongoDB", level: 75, description: "Document storage, CRUD operations & Mongoose" },
-        { name: "Express.js", level: 65, description: "REST APIs, Routing & Middleware" }
+        { name: "Express.js", level: 65, description: "REST APIs, Routing & Middleware" },
+        { name: "Next.js API Routes", level: 70, description: "Server-side API endpoint creation & handling" },
       ]
     },
     {
@@ -85,7 +88,9 @@ export const PORTFOLIO_DATA = {
       items: [
         { name: "Git & GitHub", level: 80, description: "Version control, branching & collaboration" },
         { name: "Responsive Design", level: 90, description: "Mobile-first approach across all viewports" },
-        { name: "Redux Toolkit", level: 70, description: "Global state management & Async thunks" }
+        { name: "Redux Toolkit", level: 70, description: "Global state management & Async thunks" },
+        { name: "VS Code & Codex", level: 85, description: "Code editing, extensions & debugging" },
+        { name: "Prompt Engineering", level: 75, description: "Crafting effective prompts for AI tools like ChatGPT" },
       ]
     }
   ] as SkillCategory[],
@@ -118,6 +123,35 @@ export const PORTFOLIO_DATA = {
         "Achieved top performance recognition in the training program"
       ],
       skills: ["React", "JavaScript", "HTML", "CSS", "Git"]
+    },
+    {
+      id: "exp-ai-for-everyone",
+      role: "AI for Everyone (Training Course)",
+      company: "Bano Qabil (Alkhidmat Foundation)",
+      location: "Karachi, Pakistan",
+      period: "June 2026 - July 2026",
+      description: "2-month course on Generative AI covering prompt engineering, AI-assisted productivity and responsible AI use.",
+      highlights: [
+        "Applied the C.O.R.E prompting framework (Context, Objective, Role, Examples) to get high-quality output from ChatGPT, Claude and Gemini",
+        "Used AI tools for research, writing, documentation and automating repetitive tasks",
+        "Completed a capstone project using three or more AI tools: [FILL ME]"
+      ],
+      skills: ["Prompt Engineering", "ChatGPT", "Claude", "Gemini", "Generative AI"]
+    },
+    {
+      id: "exp-generative-ai",
+      role: "Generative AI: LLM Apps, RAG & AI Agents (In Progress)",
+      company: "Bano Qabil (Alkhidmat Foundation)",
+      location: "Karachi, Pakistan",
+      period: "August 2026 - Jan 2027 (Ongoing)",
+      status: "In Progress",
+      description: "5-month builder-focused course on building AI applications with LLM APIs, RAG systems and AI agents.",
+      highlights: [
+        "Learning to work with LLM APIs (OpenAI/Claude) in Python: prompts, function calling, structured output",
+        "Learning embeddings, vector databases and RAG pipelines",
+        "Capstone planned: deployed AI-powered application"
+      ],
+      skills: ["LLM APIs", "RAG", "Vector DB", "AI Agents", "Python"]
     }
   ] as Experience[],
 
@@ -135,7 +169,7 @@ export const PORTFOLIO_DATA = {
       id: "proj-2",
       title: "Music Store Website",
       description: "Responsive music store interface inspired by modern e-commerce layouts with clean UI and mobile responsiveness.",
-      tags: ["NextJs", "TypeScript", "Framer Motion", "Tailwind CSS", "AceternityUI"],
+      tags: ["Next.js", "TypeScript", "Framer Motion", "Tailwind CSS", "AceternityUI"],
       liveUrl: "https://next-project-one-ten.vercel.app/",
       githubUrl: "https://github.com/subhan-allauddin/Next-Project-One"
     },
@@ -154,6 +188,13 @@ export const PORTFOLIO_DATA = {
       tags: ["JavaScript", "HTML", "CSS"],
       liveUrl: "https://calculator-tan-six-85.vercel.app/",
       githubUrl: "https://github.com/subhan-allauddin/Calculator"
+    },
+    {
+      id: "proj-ai-capstone",
+      title: "AI Capstone Project",
+      description: "[FILL ME] Add the capstone description and live link after the course ends.",
+      tags: ["Generative AI"],
+      status: "Planned"
     }
   ] as Project[],
 

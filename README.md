@@ -18,3 +18,10 @@ View your app in AI Studio: https://ai.studio/apps/0fd0bb68-dc87-4acf-99a5-d47a6
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+## Contact Form
+
+The contact form uses the `/api/contact` Vercel function. Configure `MONGO_URI`
+and `RESEND_URI` in the Vercel project environment to save submissions and send
+email. For local development, set these values in `.env` and run
+`npm run dev:all` to start the frontend and backend.

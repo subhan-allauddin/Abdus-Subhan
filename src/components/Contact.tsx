@@ -73,7 +73,18 @@ export const Contact: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
+      const responseBody = await res.text();
+      let data: { success?: boolean; error?: string; message?: string };
+
+      try {
+        data = JSON.parse(responseBody);
+      } catch {
+        throw new Error(`The server returned an invalid response (HTTP ${res.status}). Please try again later.`);
+      }
+
+      if (!res.ok) {
+        throw new Error(data.error || `Request failed (HTTP ${res.status}). Please try again.`);
+      }
 
       if (data.success) {
         setStatus("success");
@@ -87,9 +98,9 @@ export const Contact: React.FC = () => {
       } else {
         throw new Error(data.error || 'Failed to send message.');
       }
-    } catch (err: any) {
+    } catch (err) {
       setStatus("error");
-      setErrorMessage(err.message || "Failed to send message.");
+      setErrorMessage(err instanceof Error ? err.message : "Failed to send message.");
     }
   };
 
@@ -117,7 +128,7 @@ export const Contact: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
             className="lg:col-span-5 space-y-6"
           >
@@ -212,7 +223,7 @@ export const Contact: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
             className="lg:col-span-7"
           >
@@ -317,7 +328,6 @@ export const Contact: React.FC = () => {
                     ? 'bg-emerald-500 text-black shadow-emerald-500/25'
                     : 'bg-[#38BDF8] hover:bg-cyan-300 shadow-cyan-500/20'
                     } disabled:opacity-80 disabled:cursor-not-allowed`}
-                  onClick={handleSubmit}
                 >
                   {status === 'loading' && (
                     <>

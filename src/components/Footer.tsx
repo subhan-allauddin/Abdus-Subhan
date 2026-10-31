@@ -28,14 +28,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="md:col-span-6 space-y-3">
             <div className="flex items-center space-x-2.5">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#38BDF8] to-[#6366F1] flex items-center justify-center font-bold text-black text-sm shadow-md shadow-cyan-500/20">
-                MS
+                {personalInfo.initials}
               </div>
               <span className="text-lg font-bold text-white tracking-tight">
-                Muhammad Subhan Allauddin<span className="text-[#38BDF8]">.</span>
+                {personalInfo.name}<span className="text-[#38BDF8]">.</span>
               </span>
             </div>
             <p className="text-xs text-[#9CA3AF] max-w-md leading-relaxed">
-              A Front End Developer with a one year experience.
+              Front-End Developer with hands-on internship experience.
             </p>
           </div>
 

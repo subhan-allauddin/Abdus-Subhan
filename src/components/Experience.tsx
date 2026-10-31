@@ -20,7 +20,7 @@ export const Experience: React.FC = () => {
             Work Experience
           </h2>
           <p className="text-[#9CA3AF] text-base max-w-2xl mx-auto">
-            A proven track record of engineering impact across fast-paced tech environments and high-growth organizations.
+            My learning and hands-on experience so far.
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export const Experience: React.FC = () => {
                   key={exp.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
+                  viewport={{ once: true, amount: 0.1, margin: '-50px' }}
                   transition={{ duration: 0.6, delay: index * 0.15 }}
                   className={`relative flex flex-col sm:flex-row items-center ${isEven ? 'sm:flex-row-reverse' : ''
                     }`}
@@ -57,9 +57,16 @@ export const Experience: React.FC = () => {
                         <span className="text-lg font-bold text-white flex items-center gap-2">
                           {exp.role}
                         </span>
-                        <div className="px-3 py-1 rounded-full bg-white/10 text-white text-[10px] font-mono font-medium flex items-center gap-1.5">
-                          <Calendar className="w-3 h-3 text-[#38BDF8]" />
-                          <span>{exp.period}</span>
+                        <div className="flex flex-wrap items-center gap-2">
+                          {exp.status && (
+                            <span className="px-2.5 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/20 text-emerald-300 text-[10px] font-semibold">
+                              {exp.status}
+                            </span>
+                          )}
+                          <div className="px-3 py-1 rounded-full bg-white/10 text-white text-[10px] font-mono font-medium flex items-center gap-1.5">
+                            <Calendar className="w-3 h-3 text-[#38BDF8]" />
+                            <span>{exp.period}</span>
+                          </div>
                         </div>
                       </div>
 

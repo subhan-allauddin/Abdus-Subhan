@@ -8,14 +8,15 @@ export const Projects: React.FC = () => {
 
   const allProjects = PORTFOLIO_DATA.projects;
 
-  // Gather unique tags
-  const tagsSet = new Set<string>();
-  allProjects.forEach((p) => p.tags.forEach((t) => tagsSet.add(t)));
-  const tags = ['All', ...Array.from(tagsSet)];
+  const tags = ['All', 'Next.js', 'MongoDB', 'TypeScript', 'Tailwind'];
 
   const filteredProjects = selectedTag === 'All'
     ? allProjects
-    : allProjects.filter((p) => p.tags.includes(selectedTag));
+    : allProjects.filter((project) =>
+        project.tags.some((tag) =>
+          tag === selectedTag || (selectedTag === 'Tailwind' && tag === 'Tailwind CSS')
+        )
+      );
 
   return (
     <section id="projects" className="py-20 relative">
@@ -31,7 +32,7 @@ export const Projects: React.FC = () => {
             Crafted Software Projects
           </h2>
           <p className="text-[#9CA3AF] text-base max-w-2xl mx-auto">
-            A curated showcase of production-ready applications, open-source architectures, and interactive digital experiences.
+            Projects I have built while learning and practicing.
           </p>
         </div>
 
@@ -59,7 +60,7 @@ export const Projects: React.FC = () => {
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
+              viewport={{ once: true, amount: 0.1, margin: '-50px' }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -6, scale: 1.02 }}
               className="group relative bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-sm shadow-2xl hover:border-[#38BDF8]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden"
@@ -74,6 +75,11 @@ export const Projects: React.FC = () => {
                     {project.featured && (
                       <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#38BDF8] bg-[#38BDF8]/10 border border-[#38BDF8]/20 px-2.5 py-0.5 rounded-full mb-2 uppercase tracking-wider">
                         <Sparkles className="w-3 h-3" /> Featured Project
+                      </span>
+                    )}
+                    {project.status && (
+                      <span className="inline-flex items-center text-[10px] font-bold text-emerald-300 bg-emerald-400/10 border border-emerald-400/20 px-2.5 py-0.5 rounded-full mb-2 uppercase tracking-wider">
+                        {project.status}
                       </span>
                     )}
                     <h3 className="text-xl font-bold text-white group-hover:text-[#38BDF8] transition-colors flex items-center gap-2">
@@ -108,26 +114,32 @@ export const Projects: React.FC = () => {
               </div>
 
               {/* Action Links Footer */}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs font-medium text-[#9CA3AF] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-md p-1"
-                >
-                  <Github className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#38BDF8] transition-colors" />
-                  <span>View Repository</span>
-                </a>
+              <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+                {project.githubUrl ? (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs font-medium text-[#9CA3AF] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-md p-1"
+                  >
+                    <Github className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#38BDF8] transition-colors" />
+                    <span>View Repository</span>
+                  </a>
+                ) : (
+                  <span className="text-xs text-[#9CA3AF]">Links will be added after completion.</span>
+                )}
 
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-black bg-[#38BDF8] hover:bg-cyan-300 px-4 py-2 rounded-full transition-all shadow-md shadow-cyan-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-                >
-                  <span>Live Demo</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-black" />
-                </a>
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-black bg-[#38BDF8] hover:bg-cyan-300 px-4 py-2 rounded-full transition-all shadow-md shadow-cyan-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                  >
+                    <span>Live Demo</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-black" />
+                  </a>
+                )}
               </div>
 
             </motion.div>

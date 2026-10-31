@@ -80,15 +80,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
             whileTap={{ scale: 0.95 }}
             onClick={() => handleLinkClick('hero')}
             className="group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-lg p-1 transition-transform"
-            aria-label="Muhammad Subhan Allauddin Home"
+            aria-label={`${PORTFOLIO_DATA.personalInfo.name} Home`}
           >
             <div className="flex items-center space-x-2.5">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#38BDF8] to-[#6366F1] flex items-center justify-center font-bold text-black text-xs sm:text-sm shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-shadow">
-                ASA
+                {PORTFOLIO_DATA.personalInfo.initials}
               </div>
               <div className="flex flex-col">
                 <span className="text-sm sm:text-base font-semibold tracking-tight text-white group-hover:text-[#38BDF8] transition-colors flex items-center gap-1">
-                  Abdus Subhan Allauddin
+                  {PORTFOLIO_DATA.personalInfo.name}
                 </span>
                 <span className="text-[9px] sm:text-[10px] text-[#9CA3AF] font-medium -mt-0.5 tracking-widest uppercase">
                   Front End Developer

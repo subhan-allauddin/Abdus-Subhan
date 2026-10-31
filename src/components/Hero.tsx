@@ -43,6 +43,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     { text: 'React 19 & Next.js', icon: <Zap className="w-3.5 h-3.5 text-amber-400" /> },
     { text: 'Tailwind CSS v4', icon: <Code2 className="w-3.5 h-3.5 text-sky-400" /> },
     { text: 'Framer Motion', icon: <Sparkles className="w-3.5 h-3.5 text-indigo-400" /> },
+    { text: 'Learning Generative AI', icon: <Sparkles className="w-3.5 h-3.5 text-cyan-400" /> },
   ];
 
   return (
