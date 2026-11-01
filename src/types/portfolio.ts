@@ -56,3 +56,4 @@ export interface PortfolioData {
   experience: Experience[];
   projects: Project[];
 }
+
