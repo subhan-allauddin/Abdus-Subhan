@@ -1,49 +1,9 @@
 import resumeUrl from './ABDUL SUBHAN CV.pdf';
+import type { PortfolioData, Project, Experience, SkillCategory, PersonalInfo } from '../types/portfolio';
 
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-  featured?: boolean;
-  status?: string;
-  stars?: number;
-  image?: string;
-}
+export type { PortfolioData, Project, Experience, SkillCategory, PersonalInfo };
 
-export interface Experience {
-  id: string;
-  role: string;
-  company: string;
-  location?: string;
-  period: string;
-  status?: string;
-  description: string;
-  highlights: string[];
-  skills: string[];
-}
-
-export interface SkillCategory {
-  category: string;
-  icon: string;
-  items: {
-    name: string;
-    level: number; // 0 to 100
-    description?: string;
-  }[];
-}
-
-export interface Testimonial {
-  quote: string;
-  author: string;
-  title: string;
-  company: string;
-  avatarUrl?: string;
-}
-
-export const PORTFOLIO_DATA = {
+export const PORTFOLIO_DATA: PortfolioData = {
   personalInfo: {
     name: "Abdus Subhan Allauddin",
     initials: "ASA",
@@ -90,10 +50,10 @@ export const PORTFOLIO_DATA = {
         { name: "Responsive Design", level: 90, description: "Mobile-first approach across all viewports" },
         { name: "Redux Toolkit", level: 70, description: "Global state management & Async thunks" },
         { name: "VS Code & Codex", level: 85, description: "Code editing, extensions & debugging" },
-        { name: "Prompt Engineering", level: 75, description: "Crafting effective prompts for AI tools like ChatGPT" },
+        { name: "Prompt Engineering", level: 75, description: "Crafting effective prompts for modern AI models" },
       ]
     }
-  ] as SkillCategory[],
+  ],
 
   experience: [
     {
@@ -134,7 +94,7 @@ export const PORTFOLIO_DATA = {
       highlights: [
         "Applied the C.O.R.E prompting framework (Context, Objective, Role, Examples) to get high-quality output from ChatGPT, Claude and Gemini",
         "Used AI tools for research, writing, documentation and automating repetitive tasks",
-        "Completed a capstone project using three or more AI tools: [FILL ME]"
+        "Implemented intelligent prompt pipelines and AI workflow automations"
       ],
       skills: ["Prompt Engineering", "ChatGPT", "Claude", "Gemini", "Generative AI"]
     },
@@ -147,13 +107,13 @@ export const PORTFOLIO_DATA = {
       status: "In Progress",
       description: "5-month builder-focused course on building AI applications with LLM APIs, RAG systems and AI agents.",
       highlights: [
-        "Learning to work with LLM APIs (OpenAI/Claude) in Python: prompts, function calling, structured output",
+        "Learning to work with LLM APIs in JavaScript & Python: prompts, function calling, structured output",
         "Learning embeddings, vector databases and RAG pipelines",
         "Capstone planned: deployed AI-powered application"
       ],
       skills: ["LLM APIs", "RAG", "Vector DB", "AI Agents", "Python"]
     }
-  ] as Experience[],
+  ],
 
   projects: [
     {
@@ -192,18 +152,9 @@ export const PORTFOLIO_DATA = {
     {
       id: "proj-ai-capstone",
       title: "AI Capstone Project",
-      description: "[FILL ME] Add the capstone description and live link after the course ends.",
-      tags: ["Generative AI"],
-      status: "Planned"
+      description: "Full-stack generative AI application exploring modern LLM orchestration, structured output, and agent workflows.",
+      tags: ["Generative AI", "React", "Gemini API"],
+      status: "In Progress"
     }
-  ] as Project[],
-
-  testimonials: [
-    {
-      quote: "Subhan is a dedicated developer who delivers clean, responsive designs and demonstrates great problem-solving skills.",
-      author: "Team Lead",
-      title: "Frontend Mentor",
-      company: "Computing Yard"
-    }
-  ] as Testimonial[]
+  ]
 };
