@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowUp, Code, Github, Linkedin, Mail, Heart } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolio';
+import subhanPortrait from '../assets/images/Professional Image.jpg';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -27,9 +28,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Brand & Tagline */}
           <div className="md:col-span-6 space-y-3">
             <div className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#38BDF8] to-[#6366F1] flex items-center justify-center font-bold text-black text-sm shadow-md shadow-cyan-500/20">
-                {personalInfo.initials}
-              </div>
+              <img
+                src={subhanPortrait}
+                alt={personalInfo.name}
+                className="w-9 h-9 rounded-xl object-cover border border-sky-400/40 shadow-md shadow-cyan-500/20"
+              />
               <span className="text-lg font-bold text-white tracking-tight">
                 {personalInfo.name}<span className="text-[#38BDF8]">.</span>
               </span>

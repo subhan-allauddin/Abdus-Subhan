@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowUpRight, Sparkles, FileText, Mail } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolio';
+import subhanPortrait from '../assets/images/Professional Image.jpg';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
@@ -83,9 +84,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
             aria-label={`${PORTFOLIO_DATA.personalInfo.name} Home`}
           >
             <div className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#38BDF8] to-[#6366F1] flex items-center justify-center font-bold text-black text-xs sm:text-sm shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-shadow">
-                {PORTFOLIO_DATA.personalInfo.initials}
-              </div>
+              <img
+                src={subhanPortrait}
+                alt={PORTFOLIO_DATA.personalInfo.name}
+                className="w-9 h-9 rounded-xl object-cover border border-sky-400/40 shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 group-hover:scale-105 transition-all"
+              />
               <div className="flex flex-col">
                 <span className="text-sm sm:text-base font-semibold tracking-tight text-white group-hover:text-[#38BDF8] transition-colors flex items-center gap-1">
                   {PORTFOLIO_DATA.personalInfo.name}
