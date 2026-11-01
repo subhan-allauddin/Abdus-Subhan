@@ -209,10 +209,22 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onNavigate }) => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior,
+      });
+    } else {
+      messagesEndRef.current?.scrollIntoView({ behavior });
+    }
+  };
+
+  const handleMouseEnter = () => {
+    scrollToBottom('smooth');
   };
 
   useEffect(() => {
@@ -307,6 +319,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onNavigate }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 25 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            onMouseEnter={handleMouseEnter}
             className={`
               ${isExpanded ? 'w-[95vw] sm:w-[640px] md:w-[700px] h-[780px]' : 'w-[94vw] sm:w-[440px] md:w-[460px] h-[640px]'}
               max-h-[88vh] bg-[#090A0F]/95 backdrop-blur-2xl rounded-3xl border border-white/10
@@ -409,7 +422,11 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onNavigate }) => {
             )}
 
             {/* MESSAGES CONTAINER */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 text-sm select-text scrollbar-thin scrollbar-thumb-zinc-800">
+            <div
+              ref={messagesContainerRef}
+              onMouseEnter={handleMouseEnter}
+              className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 text-sm select-text scrollbar-thin scrollbar-thumb-zinc-800"
+            >
               {messages.map((msg) => (
                 <div
                   key={msg.id}
