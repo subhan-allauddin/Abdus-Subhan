@@ -7,6 +7,7 @@ import { Experience } from './components/Experience';
 import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { ChatWidget } from './components/ChatWidget';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('hero');
@@ -107,6 +108,8 @@ export default function App() {
         <Footer onNavigate={handleNavigate} />
       </div>
 
+      {/* Floating AI Chat Assistant at bottom-right */}
+      <ChatWidget />
     </div>
   );
 }
