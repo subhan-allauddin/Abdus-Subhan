@@ -83,3 +83,4 @@ export async function generateChatReply(messages) {
 
     throw lastError || new Error('Failed to generate response from Gemini API.');
 }
+

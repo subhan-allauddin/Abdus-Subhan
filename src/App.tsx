@@ -109,7 +109,7 @@ export default function App() {
       </div>
 
       {/* Floating AI Chat Assistant at bottom-right */}
-      <ChatWidget />
+      <ChatWidget onNavigate={handleNavigate} />
     </div>
   );
 }
