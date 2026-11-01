@@ -234,6 +234,41 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onNavigate }) => {
     }
   }, [isOpen, messages, isLoading]);
 
+  // Isolate mouse wheel/touchpad scrolling to chat container only
+  // (Prevents background page / Lenis from scrolling when mouse is over chat)
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+    if (!container || !isOpen) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      // Prevent background page from scrolling
+      e.stopPropagation();
+
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const isScrollingDown = e.deltaY > 0;
+      const isScrollingUp = e.deltaY < 0;
+
+      const canScrollDown = scrollTop + clientHeight < scrollHeight - 1;
+      const canScrollUp = scrollTop > 1;
+
+      // Always scroll chat container
+      container.scrollTop += e.deltaY;
+
+      // Prevent window/Lenis background scroll
+      if ((isScrollingDown && canScrollDown) || (isScrollingUp && canScrollUp)) {
+        e.preventDefault();
+      } else {
+        // At limits, still prevent page jump
+        e.preventDefault();
+      }
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, [isOpen]);
+
   const handleSend = async (textToSend?: string) => {
     const text = (textToSend || inputValue).trim();
     if (!text || isLoading) return;
@@ -320,6 +355,8 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onNavigate }) => {
             exit={{ opacity: 0, scale: 0.92, y: 25 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             onMouseEnter={handleMouseEnter}
+            data-lenis-prevent="true"
+            data-lenis-prevent-wheel="true"
             className={`
               ${isExpanded ? 'w-[95vw] sm:w-[640px] md:w-[700px] h-[780px]' : 'w-[94vw] sm:w-[440px] md:w-[460px] h-[640px]'}
               max-h-[88vh] bg-[#090A0F]/95 backdrop-blur-2xl rounded-3xl border border-white/10
@@ -425,7 +462,9 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onNavigate }) => {
             <div
               ref={messagesContainerRef}
               onMouseEnter={handleMouseEnter}
-              className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 text-sm select-text scrollbar-thin scrollbar-thumb-zinc-800"
+              data-lenis-prevent="true"
+              data-lenis-prevent-wheel="true"
+              className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 text-sm select-text overscroll-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
               {messages.map((msg) => (
                 <div
