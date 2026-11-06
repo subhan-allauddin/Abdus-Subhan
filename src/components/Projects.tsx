@@ -8,13 +8,14 @@ export const Projects: React.FC = () => {
 
   const allProjects = PORTFOLIO_DATA.projects;
 
-  const tags = ['All', 'Next.js', 'MongoDB', 'TypeScript', 'Tailwind'];
+  const tags = ['All', 'Next.js', 'JavaScript', 'TypeScript', 'Tailwind', 'Bootstrap'];
 
   const filteredProjects = selectedTag === 'All'
     ? allProjects
     : allProjects.filter((project) =>
         project.tags.some((tag) =>
-          tag === selectedTag || (selectedTag === 'Tailwind' && tag === 'Tailwind CSS')
+          tag.toLowerCase() === selectedTag.toLowerCase() ||
+          (selectedTag === 'Tailwind' && tag.toLowerCase().includes('tailwind'))
         )
       );
 

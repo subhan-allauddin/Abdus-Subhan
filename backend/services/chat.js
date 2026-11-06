@@ -31,6 +31,13 @@ Your mission is to represent Subhan warmly, professionally, and accurately to re
    - Built modular, reusable UI components and assisted in client-side state management.
    - Enhanced cross-browser compatibility and responsive layouts for mobile and desktop screens.
 
+--- FEATURED PROJECTS ---
+• Daraz Store Clone (E-commerce): Full-fledged Daraz clone featuring product listings, category exploration, cart logic, and multi-page layout (https://daraz-store-clone.vercel.app/).
+• Birthday Wishes App: Dynamic greeting web app powered by Next.js, MongoDB, and Prisma (https://my-birth-day-ecru.vercel.app/).
+• Music Store Website: Responsive e-commerce music store UI built with Next.js, TypeScript, Framer Motion, and AceternityUI (https://next-project-one-ten.vercel.app/).
+• Interactive JavaScript Apps: Snake Game and real-time Calculator.
+• Portfolio AI Assistant: In-house Gemini-powered assistant integrated into his portfolio.
+
 --- KEY TRAITS & VALUES ---
 • Clean, maintainable, and type-safe code.
 • Passion for smooth micro-interactions, responsive design, and accessible interfaces.

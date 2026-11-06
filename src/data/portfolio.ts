@@ -117,6 +117,15 @@ export const PORTFOLIO_DATA: PortfolioData = {
 
   projects: [
     {
+      id: "proj-daraz",
+      title: "Daraz Store Clone",
+      description: "A comprehensive e-commerce clone of Daraz featuring category navigation, product catalogs, shopping cart logic, and responsive multi-page layout.",
+      tags: ["JavaScript", "Bootstrap", "HTML5", "CSS3"],
+      liveUrl: "https://daraz-store-clone.vercel.app/",
+      githubUrl: "https://github.com/subhan-allauddin/Daraz-Store-Clone",
+      featured: true
+    },
+    {
       id: "proj-1",
       title: "Birthday Wishes App",
       description: "A dynamic web app where users can send and store birthday wishes using MongoDB and Prisma as a database.",
