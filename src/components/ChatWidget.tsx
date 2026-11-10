@@ -22,7 +22,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolio';
-import subhanPortrait from '../assets/images/Professional Image.jpg';
+import subhanPortrait from '../assets/images/subhan-portrait-enhanced.jpg';
 
 interface ChatMessage {
   id: string;
@@ -359,24 +359,24 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onNavigate }) => {
             data-lenis-prevent-wheel="true"
             className={`
               ${isExpanded ? 'w-[95vw] sm:w-[640px] md:w-[700px] h-[780px]' : 'w-[94vw] sm:w-[440px] md:w-[460px] h-[640px]'}
-              max-h-[88vh] bg-[#090A0F]/95 backdrop-blur-2xl rounded-3xl border border-white/10
-              shadow-[0_20px_60px_-15px_rgba(0,0,0,0.9),0_0_50px_rgba(56,189,248,0.12)]
-              flex flex-col overflow-hidden mb-4 ring-1 ring-sky-500/20 transition-all duration-300
+              max-h-[88vh] bg-[#0D121B]/95 backdrop-blur-2xl rounded-3xl border border-white/10
+              shadow-[0_20px_60px_-15px_rgba(0,0,0,0.9),0_0_40px_rgba(34,184,240,0.12)]
+              flex flex-col overflow-hidden mb-4 ring-1 ring-[#22B8F0]/20 transition-all duration-300
             `}
           >
             {/* Ambient Top Glow */}
-            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-sky-500/10 via-indigo-500/5 to-transparent pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#22B8F0]/10 via-[#A78BFA]/5 to-transparent pointer-events-none" />
 
             {/* HEADER */}
-            <div className="relative px-5 py-4 border-b border-white/10 bg-[#0d1017]/90 flex items-center justify-between z-10">
+            <div className="relative px-5 py-4 border-b border-white/10 bg-[#191C26]/90 flex items-center justify-between z-10">
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <img
                     src={subhanPortrait}
                     alt="Abdus Subhan"
-                    className="w-10 h-10 rounded-2xl object-cover border border-sky-400/30 shadow-md"
+                    className="w-10 h-10 rounded-2xl object-cover object-top border border-[#22B8F0]/35 shadow-md"
                   />
-                  <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#0d1017] rounded-full flex items-center justify-center">
+                  <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#191C26] rounded-full flex items-center justify-center">
                     <span className="w-1.5 h-1.5 bg-white rounded-full animate-ping opacity-75" />
                   </span>
                 </div>
@@ -616,31 +616,31 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onNavigate }) => {
 
       {/* FLOATING ACTION TRIGGER PILL */}
       <motion.button
-        whileHover={{ scale: 1.04, y: -2 }}
-        whileTap={{ scale: 0.96 }}
+        whileHover={{ scale: 1.03, y: -2 }}
+        whileTap={{ scale: 0.97 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="relative group flex items-center gap-3.5 pl-2.5 pr-5 py-2.5 rounded-full bg-[#0c0f18]/95 hover:bg-[#121624] border border-sky-400/30 text-white shadow-[0_12px_40px_rgba(56,189,248,0.25)] hover:shadow-[0_16px_50px_rgba(56,189,248,0.4)] backdrop-blur-xl transition-all"
+        className="relative group flex items-center gap-2.5 sm:gap-3.5 pl-2 pr-3.5 py-2 sm:pl-2.5 sm:pr-5 sm:py-2.5 rounded-full bg-[#191C26]/95 hover:bg-[#1F2432] border border-[#22B8F0]/35 text-[#F8FAFC] shadow-[0_12px_36px_rgba(34,184,240,0.2)] hover:shadow-[0_16px_44px_rgba(34,184,240,0.32)] backdrop-blur-xl transition-all"
       >
-        {/* Animated Glow Aura */}
-        <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500 opacity-30 group-hover:opacity-75 blur-md -z-10 transition-opacity animate-pulse-glow" />
+        {/* Subtle Glow Aura */}
+        <span className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-[#22B8F0]/30 to-[#A78BFA]/30 opacity-40 group-hover:opacity-75 blur-md -z-10 transition-opacity" />
 
-        {/* Thumbnail or Bot Icon */}
+        {/* Thumbnail */}
         <div className="relative">
           <img
             src={subhanPortrait}
             alt="Abdus Subhan"
-            className="w-9 h-9 rounded-full object-cover border-2 border-sky-400/50 shadow-sm"
+            className="w-9 h-9 rounded-full object-cover object-top border-2 border-[#22B8F0]/50 shadow-sm"
           />
-          <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 border-2 border-[#090A0F] rounded-full" />
+          <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 border-2 border-[#191C26] rounded-full" />
         </div>
 
         {/* Text Details */}
         <div className="text-left flex flex-col">
-          <span className="text-[10px] font-mono text-sky-400 uppercase tracking-widest leading-none flex items-center gap-1">
-            <Sparkles className="w-2.5 h-2.5 text-sky-400 animate-spin" style={{ animationDuration: '4s' }} />
+          <span className="text-[10px] font-mono text-[#22B8F0] uppercase tracking-widest leading-none flex items-center gap-1">
+            <Sparkles className="w-2.5 h-2.5 text-[#22B8F0]" />
             AI Assistant
           </span>
-          <span className="text-xs font-semibold text-white tracking-tight leading-snug mt-0.5">
+          <span className="text-xs font-semibold text-[#F8FAFC] tracking-tight leading-snug mt-0.5">
             {isOpen ? 'Close Chat' : 'Ask Subhan AI'}
           </span>
         </div>

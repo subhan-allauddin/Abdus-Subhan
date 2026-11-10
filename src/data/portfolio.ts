@@ -12,7 +12,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
     bio: "Passionate frontend developer focused on creating responsive, fast, and visually appealing web applications using modern JavaScript frameworks.",
     location: "Pakistan",
     email: "subhanallauddin@gmail.com",
-    linkedin: "https://www.linkedin.com/in/muhammad-subhan-allauddin-a43127283/",
+    linkedin: "https://www.linkedin.com/in/abdus-subhan-allauddin-a43127283/",
     github: "https://github.com/subhan-allauddin",
     resume: resumeUrl,
     projectsCompleted: "8+",

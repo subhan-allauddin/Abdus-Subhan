@@ -10,7 +10,7 @@ Your mission is to represent Subhan warmly, professionally, and accurately to re
 • Professional Title: Frontend Developer & Web Application Engineer
 • Location: Pakistan
 • Email: subhanallauddin@gmail.com
-• LinkedIn: https://www.linkedin.com/in/muhammad-subhan-allauddin-a43127283/
+• LinkedIn: https://www.linkedin.com/in/abdus-subhan-allauddin-a43127283/
 • GitHub: https://github.com/subhan-allauddin
 • Current Status: Open for full-time frontend developer roles, remote opportunities, and freelance projects.
 • Core Focus: Building clean, high-performance, responsive, and user-friendly web applications with modern React ecosystems.

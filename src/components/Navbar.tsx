@@ -1,40 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ArrowUpRight, Sparkles, FileText, Mail } from 'lucide-react';
+import { Menu, X, ArrowUpRight, FileText, Mail } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolio';
-import subhanPortrait from '../assets/images/Professional Image.jpg';
+import subhanPortrait from '../assets/images/subhan-portrait-enhanced.jpg';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
   activeSection: string;
 }
 
-// Animation Variants for Drawer Items
 const menuVariants = {
   closed: {
     opacity: 0,
     height: 0,
     transition: {
-      duration: 0.25,
-      when: "afterChildren",
-      staggerChildren: 0.05,
-      staggerDirection: -1
-    }
+      duration: 0.22,
+      when: 'afterChildren',
+      staggerChildren: 0.04,
+      staggerDirection: -1,
+    },
   },
   open: {
     opacity: 1,
-    height: "auto",
+    height: 'auto',
     transition: {
-      duration: 0.3,
-      when: "beforeChildren",
-      staggerChildren: 0.05
-    }
-  }
+      duration: 0.28,
+      when: 'beforeChildren',
+      staggerChildren: 0.04,
+    },
+  },
 };
 
 const itemVariants = {
-  closed: { opacity: 0, y: -10 },
-  open: { opacity: 1, y: 0 }
+  closed: { opacity: 0, y: -8 },
+  open: { opacity: 1, y: 0 },
 };
 
 export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => {
@@ -46,7 +45,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -55,6 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
     { name: 'Skills', href: 'skills' },
     { name: 'Experience', href: 'experience' },
     { name: 'Projects', href: 'projects' },
+    { name: 'Contact', href: 'contact' },
   ];
 
   const handleLinkClick = (href: string) => {
@@ -64,60 +65,69 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
 
   return (
     <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-[#090A0F]/80 backdrop-blur-md border-b border-white/10 shadow-2xl py-3'
-        : 'bg-transparent py-4 sm:py-5'
-        }`}
+      initial={{ y: -12 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-[#080B12]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-xl shadow-black/30 py-3'
+          : 'bg-transparent py-4 sm:py-5'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-
+        <div className="flex items-center justify-between gap-4">
           {/* Brand Logo */}
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.95 }}
+          <button
+            type="button"
             onClick={() => handleLinkClick('hero')}
-            className="group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded-lg p-1 transition-transform"
+            className="group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0] rounded-xl p-1 -ml-1 transition-transform active:scale-[0.98]"
             aria-label={`${PORTFOLIO_DATA.personalInfo.name} Home`}
           >
-            <div className="flex items-center space-x-2.5">
-              <img
-                src={subhanPortrait}
-                alt={PORTFOLIO_DATA.personalInfo.name}
-                className="w-9 h-9 rounded-xl object-cover border border-sky-400/40 shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 group-hover:scale-105 transition-all"
-              />
+            <div className="flex items-center gap-3">
+              <div className="relative w-9 h-9 rounded-xl overflow-hidden border border-[#22B8F0]/35 bg-[#191C26] shadow-md shadow-[#22B8F0]/10 group-hover:border-[#22B8F0]/70 transition-colors">
+                <img
+                  src={subhanPortrait}
+                  alt={PORTFOLIO_DATA.personalInfo.name}
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
               <div className="flex flex-col">
-                <span className="text-sm sm:text-base font-semibold tracking-tight text-white group-hover:text-[#38BDF8] transition-colors flex items-center gap-1">
+                <span className="text-sm sm:text-[15px] font-semibold tracking-tight text-[#F8FAFC] group-hover:text-[#22B8F0] transition-colors">
                   {PORTFOLIO_DATA.personalInfo.name}
                 </span>
-                <span className="text-[9px] sm:text-[10px] text-[#9CA3AF] font-medium -mt-0.5 tracking-widest uppercase">
-                  Front End Developer
+                <span className="text-[10px] text-[#94A3B8] font-medium tracking-[0.14em] uppercase">
+                  {PORTFOLIO_DATA.personalInfo.role}
                 </span>
               </div>
             </div>
-          </motion.button>
+          </button>
 
-          {/* Nav Links (Visible on Large Tablets & Desktop - `lg:flex`) */}
-          <nav className="hidden lg:flex items-center space-x-1 bg-white/5 p-1.5 rounded-full border border-white/10 backdrop-blur-md">
+          {/* Desktop Navigation Pill */}
+          <nav
+            aria-label="Primary navigation"
+            className="hidden lg:flex items-center gap-1 bg-[#0D121B]/85 p-1.5 rounded-full border border-white/[0.08] backdrop-blur-md"
+          >
             {navLinks.map((link) => {
               const isActive = activeSection === link.href;
               return (
                 <button
                   key={link.name}
+                  type="button"
                   onClick={() => handleLinkClick(link.href)}
-                  className={`px-3.5 xl:px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 relative ${isActive
-                    ? 'text-[#38BDF8] font-semibold'
-                    : 'text-[#9CA3AF] hover:text-white hover:bg-white/5'
-                    }`}
+                  aria-current={isActive ? 'location' : undefined}
+                  className={`px-3.5 xl:px-4 py-1.5 rounded-full text-xs font-medium transition-colors duration-200 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0] ${
+                    isActive
+                      ? 'text-[#22B8F0] font-semibold'
+                      : 'text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-white/[0.04]'
+                  }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeNavBackground"
-                      className="absolute inset-0 bg-[#38BDF8]/10 border border-[#38BDF8]/30 rounded-full"
-                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                      className="absolute inset-0 bg-[#22B8F0]/12 border border-[#22B8F0]/30 rounded-full"
+                      transition={{ type: 'spring', stiffness: 420, damping: 32 }}
                     />
                   )}
                   <span className="relative z-10">{link.name}</span>
@@ -126,138 +136,114 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
             })}
           </nav>
 
-          {/* CTA Action Buttons (Desktop & Large Tablets - `lg:flex`) */}
-          <div className="hidden lg:flex items-center space-x-2.5 xl:space-x-3">
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={PORTFOLIO_DATA.personalInfo.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3.5 py-1.5 text-xs font-medium text-[#9CA3AF] hover:text-white border border-white/10 hover:border-white/20 rounded-full backdrop-blur-sm transition-all duration-200 flex items-center gap-1.5 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-            >
-              <FileText className="w-3.5 h-3.5 text-[#38BDF8]" />
-              <span>Resume</span>
-              <ArrowUpRight className="w-3 h-3 text-[#9CA3AF]" />
-            </motion.a>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleLinkClick('contact')}
-              className="px-4 py-2 bg-[#38BDF8] text-black rounded-full font-bold text-xs hover:bg-cyan-400 shadow-lg shadow-cyan-500/20 transition-all duration-200 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-black" />
-              <span>Get in Touch</span>
-            </motion.button>
-          </div>
-
-          {/* Tablet Quick Action + Menu Toggle (`lg:hidden`) */}
-          <div className="lg:hidden flex items-center gap-2 sm:gap-3">
-            {/* Quick Resume Link for Tablets */}
+          {/* Desktop CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-2.5">
             <a
               href={PORTFOLIO_DATA.personalInfo.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-[#9CA3AF] hover:text-white border border-white/10 rounded-full bg-white/5 transition-colors"
+              className="px-3.5 py-2 text-xs font-medium text-[#94A3B8] hover:text-[#F8FAFC] bg-[#191C26]/70 hover:bg-[#191C26] border border-white/[0.08] hover:border-white/20 rounded-full transition-all duration-200 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0]"
             >
-              <FileText className="w-3.5 h-3.5 text-sky-400" />
-              <span>CV</span>
+              <FileText className="w-3.5 h-3.5 text-[#22B8F0]" />
+              <span>Resume</span>
+              <ArrowUpRight className="w-3 h-3 text-[#94A3B8]" />
             </a>
 
-            {/* Mobile / Tablet Drawer Toggle Button */}
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-              aria-label="Toggle navigation menu"
+            <button
+              type="button"
+              onClick={() => handleLinkClick('contact')}
+              className="px-4 py-2 bg-[#22B8F0] hover:bg-[#38C4F5] text-[#080B12] rounded-full font-semibold text-xs shadow-lg shadow-[#22B8F0]/20 transition-all duration-200 flex items-center gap-1.5 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0] focus-visible:ring-offset-2 focus-visible:ring-offset-[#080B12]"
             >
-              <AnimatePresence mode="wait">
-                {isMobileOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.15 }}
-                  >
-                    <X className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.15 }}
-                  >
-                    <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
+              <Mail className="w-3.5 h-3.5" />
+              <span>Get in Touch</span>
+            </button>
+          </div>
+
+          {/* Mobile & Tablet Actions */}
+          <div className="lg:hidden flex items-center gap-2 sm:gap-3">
+            <a
+              href={PORTFOLIO_DATA.personalInfo.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#94A3B8] hover:text-[#F8FAFC] border border-white/[0.08] rounded-full bg-[#191C26]/80 transition-colors"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#22B8F0]" />
+              <span>Resume</span>
+            </a>
+
+            <button
+              type="button"
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              aria-expanded={isMobileOpen}
+              aria-controls="mobile-nav-drawer"
+              aria-label={isMobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              className="p-2 rounded-xl bg-[#191C26] border border-white/[0.08] text-[#94A3B8] hover:text-[#F8FAFC] hover:border-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0]"
+            >
+              {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile & Tablet Dropdown Drawer (`lg:hidden`) */}
+      {/* Mobile & Tablet Dropdown Drawer */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
+            id="mobile-nav-drawer"
             variants={menuVariants}
             initial="closed"
             animate="open"
             exit="closed"
-            className="lg:hidden bg-[#090A0F]/95 border-b border-white/10 backdrop-blur-2xl overflow-hidden shadow-2xl"
+            className="lg:hidden bg-[#080B12]/95 border-b border-white/[0.08] backdrop-blur-2xl overflow-hidden shadow-2xl"
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-2">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {navLinks.map((link) => (
-                  <motion.button
-                    key={link.name}
-                    variants={itemVariants}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => handleLinkClick(link.href)}
-                    className={`w-full text-left px-4 py-3 sm:py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center justify-between ${activeSection === link.href
-                      ? 'bg-sky-500/10 text-sky-400 border border-sky-500/30'
-                      : 'text-gray-300 hover:bg-white/5 hover:text-white border border-transparent'
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 space-y-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.href;
+                  return (
+                    <motion.button
+                      key={link.name}
+                      type="button"
+                      variants={itemVariants}
+                      onClick={() => handleLinkClick(link.href)}
+                      className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center justify-between ${
+                        isActive
+                          ? 'bg-[#22B8F0]/12 text-[#22B8F0] border border-[#22B8F0]/30'
+                          : 'text-[#94A3B8] hover:bg-[#191C26] hover:text-[#F8FAFC] border border-transparent'
                       }`}
-                  >
-                    <span>{link.name}</span>
-                    {activeSection === link.href && (
-                      <motion.span
-                        layoutId="activeDot"
-                        className="w-2 h-2 rounded-full bg-sky-400 shadow-sm shadow-sky-400"
-                      />
-                    )}
-                  </motion.button>
-                ))}
+                    >
+                      <span>{link.name}</span>
+                      {isActive && (
+                        <span className="w-2 h-2 rounded-full bg-[#22B8F0]" />
+                      )}
+                    </motion.button>
+                  );
+                })}
               </div>
 
-              {/* Drawer Bottom Actions */}
               <motion.div
                 variants={itemVariants}
-                className="pt-4 mt-2 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-2.5"
+                className="pt-3 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-2 gap-2.5"
               >
                 <a
                   href={PORTFOLIO_DATA.personalInfo.resume}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full text-center py-2.5 px-4 rounded-xl text-sm font-medium text-gray-200 border border-white/10 bg-white/5 hover:bg-white/10 flex items-center justify-center gap-2 transition-colors"
+                  className="w-full py-2.5 px-4 rounded-xl text-sm font-medium text-[#F8FAFC] border border-white/[0.08] bg-[#191C26] hover:border-white/20 flex items-center justify-center gap-2 transition-colors"
                 >
-                  <FileText className="w-4 h-4 text-sky-400" />
+                  <FileText className="w-4 h-4 text-[#22B8F0]" />
                   <span>View Resume</span>
-                  <ArrowUpRight className="w-4 h-4 text-gray-400" />
+                  <ArrowUpRight className="w-4 h-4 text-[#94A3B8]" />
                 </a>
 
-                <motion.button
-                  whileTap={{ scale: 0.97 }}
+                <button
+                  type="button"
                   onClick={() => handleLinkClick('contact')}
-                  className="w-full text-center py-2.5 px-4 rounded-xl text-sm font-semibold text-black bg-[#38BDF8] hover:bg-cyan-400 flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20 transition-colors"
+                  className="w-full py-2.5 px-4 rounded-xl text-sm font-semibold text-[#080B12] bg-[#22B8F0] hover:bg-[#38C4F5] flex items-center justify-center gap-2 shadow-lg shadow-[#22B8F0]/20 transition-colors"
                 >
-                  <Mail className="w-4 h-4 text-black" />
+                  <Mail className="w-4 h-4" />
                   <span>Get In Touch</span>
-                </motion.button>
+                </button>
               </motion.div>
             </div>
           </motion.div>
