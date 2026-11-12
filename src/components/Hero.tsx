@@ -84,7 +84,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             <motion.div variants={itemVariants} className="space-y-3.5">
               <p className="text-sm sm:text-base font-medium text-[#94A3B8]">
                 Hi, I&apos;m{' '}
-                <span className="text-[#F8FAFC] font-semibold whitespace-nowrap">{personalInfo.name}</span>
+                <span className="text-[#F8FAFC] font-semibold sm:whitespace-nowrap">{personalInfo.name}</span>
                 <span className="mx-2 text-white/20 hidden sm:inline">•</span>
                 <span className="block sm:inline text-[#22B8F0] font-medium mt-0.5 sm:mt-0">
                   {personalInfo.role}
@@ -210,7 +210,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             transition={{ duration: 0.45, ease: 'easeOut' }}
             className="lg:col-span-5 flex justify-center"
           >
-            <div className="relative w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[400px] group">
+            <div className="relative w-full max-w-[280px] sm:max-w-[360px] lg:max-w-[400px] group">
               {/* Soft Blue Radial Glow Behind Portrait */}
               <div
                 aria-hidden="true"

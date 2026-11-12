@@ -50,6 +50,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile navigation drawer on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMobileOpen) {
+        setIsMobileOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileOpen]);
+
   const navLinks = [
     { name: 'About', href: 'hero' },
     { name: 'Skills', href: 'skills' },
@@ -165,10 +176,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
               href={PORTFOLIO_DATA.personalInfo.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#94A3B8] hover:text-[#F8FAFC] border border-white/[0.08] rounded-full bg-[#191C26]/80 transition-colors"
+              aria-label="View Resume"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-medium text-[#94A3B8] hover:text-[#F8FAFC] border border-white/[0.08] hover:border-white/20 rounded-full bg-[#191C26]/80 transition-colors"
             >
               <FileText className="w-3.5 h-3.5 text-[#22B8F0]" />
-              <span>Resume</span>
+              <span className="hidden sm:inline">Resume</span>
             </a>
 
             <button
@@ -190,6 +202,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection }) => 
         {isMobileOpen && (
           <motion.div
             id="mobile-nav-drawer"
+            role="region"
+            aria-label="Mobile Navigation Drawer"
             variants={menuVariants}
             initial="closed"
             animate="open"

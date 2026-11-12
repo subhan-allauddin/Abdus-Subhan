@@ -26,28 +26,34 @@ export const Contact: React.FC = () => {
   });
 
   const [touched, setTouched] = useState({
+    name: false,
     email: false,
+    message: false,
   });
 
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Live Email Regex Validation
+  // Live Field Validation States
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const isEmailValid = emailRegex.test(formData.email);
-  const showEmailError = touched.email && formData.email.length > 0 && !isEmailValid;
+  const isEmailValid = emailRegex.test(formData.email.trim());
+  const showNameError = touched.name && !formData.name.trim();
+  const showEmailError =
+    touched.email && (!formData.email.trim() || !isEmailValid);
+  const showMessageError = touched.message && !formData.message.trim();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleBlur = (field: string) => {
+  const handleBlur = (field: 'name' | 'email' | 'message') => {
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setTouched({ name: true, email: true, message: true });
 
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setStatus('error');
@@ -91,7 +97,7 @@ export const Contact: React.FC = () => {
       if (data.success) {
         setStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
-        setTouched({ email: false });
+        setTouched({ name: false, email: false, message: false });
 
         setTimeout(() => {
           setStatus('idle');
@@ -252,12 +258,19 @@ export const Contact: React.FC = () => {
                 {/* Name & Email Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
-                    <label
-                      htmlFor="contact-name"
-                      className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider block"
-                    >
-                      Your Name <span className="text-[#22B8F0]">*</span>
-                    </label>
+                    <div className="flex items-center justify-between gap-2">
+                      <label
+                        htmlFor="contact-name"
+                        className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider"
+                      >
+                        Your Name <span className="text-[#22B8F0]">*</span>
+                      </label>
+                      {showNameError && (
+                        <span className="text-[11px] text-rose-400 flex items-center gap-1 font-medium">
+                          <AlertCircle className="w-3 h-3" /> Name is required
+                        </span>
+                      )}
+                    </div>
                     <input
                       id="contact-name"
                       type="text"
@@ -265,8 +278,13 @@ export const Contact: React.FC = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
+                      onBlur={() => handleBlur('name')}
                       placeholder="Your full name"
-                      className="w-full px-4 py-3 rounded-xl bg-[#0D121B] border border-white/10 text-[#F8FAFC] placeholder-[#64748B] text-sm focus:outline-none focus:border-[#22B8F0] focus:ring-2 focus:ring-[#22B8F0]/20 transition-all"
+                      className={`w-full px-4 py-3 rounded-xl bg-[#0D121B] text-[#F8FAFC] placeholder-[#64748B] text-sm focus:outline-none focus:ring-2 transition-all ${
+                        showNameError
+                          ? 'border border-rose-500 focus:ring-rose-500/25'
+                          : 'border border-white/10 focus:border-[#22B8F0] focus:ring-[#22B8F0]/20'
+                      }`}
                     />
                   </div>
 
@@ -280,7 +298,8 @@ export const Contact: React.FC = () => {
                       </label>
                       {showEmailError && (
                         <span className="text-[11px] text-rose-400 flex items-center gap-1 font-medium">
-                          <AlertCircle className="w-3 h-3" /> Invalid Email
+                          <AlertCircle className="w-3 h-3" />{' '}
+                          {!formData.email.trim() ? 'Email is required' : 'Invalid email'}
                         </span>
                       )}
                     </div>
@@ -323,12 +342,19 @@ export const Contact: React.FC = () => {
 
                 {/* Message */}
                 <div className="space-y-2">
-                  <label
-                    htmlFor="contact-message"
-                    className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider block"
-                  >
-                    Message <span className="text-[#22B8F0]">*</span>
-                  </label>
+                  <div className="flex items-center justify-between gap-2">
+                    <label
+                      htmlFor="contact-message"
+                      className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider block"
+                    >
+                      Message <span className="text-[#22B8F0]">*</span>
+                    </label>
+                    {showMessageError && (
+                      <span className="text-[11px] text-rose-400 flex items-center gap-1 font-medium">
+                        <AlertCircle className="w-3 h-3" /> Message is required
+                      </span>
+                    )}
+                  </div>
                   <textarea
                     id="contact-message"
                     name="message"
@@ -336,8 +362,13 @@ export const Contact: React.FC = () => {
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
+                    onBlur={() => handleBlur('message')}
                     placeholder="Tell me about your project, timeline, or opportunity..."
-                    className="w-full px-4 py-3 rounded-xl bg-[#0D121B] border border-white/10 text-[#F8FAFC] placeholder-[#64748B] text-sm focus:outline-none focus:border-[#22B8F0] focus:ring-2 focus:ring-[#22B8F0]/20 transition-all resize-none"
+                    className={`w-full px-4 py-3 rounded-xl bg-[#0D121B] text-[#F8FAFC] placeholder-[#64748B] text-sm focus:outline-none focus:ring-2 transition-all resize-none ${
+                      showMessageError
+                        ? 'border border-rose-500 focus:ring-rose-500/25'
+                        : 'border border-white/10 focus:border-[#22B8F0] focus:ring-[#22B8F0]/20'
+                    }`}
                   />
                 </div>
 

@@ -57,13 +57,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
 
           {/* Quick Navigation */}
-          <nav aria-label="Footer navigation" className="md:col-span-5 flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium text-[#94A3B8]">
+          <nav aria-label="Footer navigation" className="md:col-span-5 flex flex-wrap gap-x-2 sm:gap-x-3 gap-y-1 text-xs font-medium text-[#94A3B8]">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => onNavigate(item.id)}
-                className="hover:text-[#22B8F0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0] rounded px-1 py-0.5"
+                className="hover:text-[#22B8F0] hover:bg-white/[0.04] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0] rounded-lg px-2.5 py-1.5 min-h-[36px] flex items-center"
               >
                 {item.label}
               </button>
@@ -90,12 +90,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <a
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-[#191C26]/70 border border-white/[0.08] hover:border-[#22B8F0]/40 hover:text-[#22B8F0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0]"
+              className="p-2.5 rounded-xl bg-[#191C26]/70 border border-white/[0.08] hover:border-[#22B8F0]/40 hover:text-[#22B8F0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0]"
               aria-label="GitHub"
             >
               <Github className="w-4 h-4" />
@@ -104,14 +104,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-[#191C26]/70 border border-white/[0.08] hover:border-[#22B8F0]/40 hover:text-[#22B8F0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0]"
+              className="p-2.5 rounded-xl bg-[#191C26]/70 border border-white/[0.08] hover:border-[#22B8F0]/40 hover:text-[#22B8F0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0]"
               aria-label="LinkedIn"
             >
               <Linkedin className="w-4 h-4" />
             </a>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="p-2 rounded-lg bg-[#191C26]/70 border border-white/[0.08] hover:border-[#22B8F0]/40 hover:text-[#22B8F0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0]"
+              className="p-2.5 rounded-xl bg-[#191C26]/70 border border-white/[0.08] hover:border-[#22B8F0]/40 hover:text-[#22B8F0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22B8F0]"
               aria-label="Email"
             >
               <Mail className="w-4 h-4" />
