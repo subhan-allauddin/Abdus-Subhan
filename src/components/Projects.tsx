@@ -16,6 +16,7 @@ export const Projects: React.FC = () => {
     'TypeScript',
     'Tailwind',
     'Bootstrap',
+    'Node.js',
     'Generative AI',
   ];
 
